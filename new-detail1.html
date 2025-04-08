@@ -1,0 +1,292 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Quyen PLH Clothing - Phong cách Minimalism cho phụ nữ thành thị.">
+    <title>Quyen PLH Clothing - Thời trang nữ phong cách Minimalism</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preload" href="logo/logo.png" as="image">
+
+    <!-- Font Awesome d? dùng icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta charset="UTF-8">
+
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="new.html">New</a></li>
+                <li><a href="best.html">Best</a></li>
+                <li><a href="top.html">Top</a></li>
+                <li><a href="botton.html">Botton</a></li>
+                <li><a href="dress.html">Dress</a></li>
+                <li><a href="coat.html">Coat</a></li>
+                <li><a href="acc.html">Acc</a></li>
+            </ul>
+        </nav>
+
+        <div class="logo">
+            <a href="index.html"><img src="logo/logo.png" alt="Quyen PLH Logo"></a>
+        </div>
+
+        <div class="contact-info">
+            <p><i class="fas fa-map-marker-alt"></i> Danang, Vietnam</p>
+            <p><i class="fas fa-clock"></i> Open 8:00-20:00</p>
+            <p><i class="fas fa-calendar-alt"></i> From Monday to Sunday</p>
+        </div>
+    </header>
+
+   
+  <style>
+    .product-detail-page {
+      display: flex;
+      flex-direction: row;
+      gap: 40px;
+      padding: 60px 80px;
+    }
+
+    .image-gallery {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+    }
+
+    .thumbnail-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .thumbnail-list img {
+      width: 70px;
+      height: auto;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: border 0.2s ease;
+    }
+
+    .thumbnail-list img:hover {
+      border: 2px solid #000;
+    }
+
+    .main-image img {
+      width: 400px;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .product-info {
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .product-info h1 {
+      font-size: 24px;
+      margin-bottom: 0;
+    }
+
+    .price {
+      font-size: 20px;
+      color: #d12a2a;
+    }
+
+    .size-buttons button {
+      margin-right: 10px;
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      background: white;
+      cursor: pointer;
+    }
+
+    .add-to-cart {
+      padding: 12px;
+      background-color: black;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+      text-align: center;
+      padding: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+ 
+  <!-- ===== CHI TIẾT SẢN PHẨM ===== -->
+  <main class="product-detail-page">
+    <!-- Image Gallery -->
+    <div class="image-gallery">
+      <div class="product-thumbnails">
+        <img src="images/detailnew1.jpg" alt="Detail 1" onclick="changeMainImage(this.src)">
+        <img src="images/detailnew2.jpg" alt="Detail 2" onclick="changeMainImage(this.src)">
+        <img src="images/detailnew3.jpg" alt="Detail 3" onclick="changeMainImage(this.src)">
+        <img src="images/detailnew4.jpg" alt="Detail 4" onclick="changeMainImage(this.src)">
+      </div>
+      <div class="main-image">
+        <img id="mainProductImage" src="images/new1.jpg" alt="Ảnh chính sản phẩm">
+      </div>
+    </div>
+
+    <!-- Product Info -->
+    <div class="product-info">
+      <h1>Dot Pumkin Dress</h1>
+    <p class="price">PRICE: 500.000</p>
+
+   <!-- HTML cho các nút Size (S, M, L) -->
+<div class="size-row">
+    <span>Size:</span>
+    <div class="size-buttons">
+        <button onclick="selectSize(this)">S</button>
+        <button onclick="selectSize(this)">M</button>
+        <button onclick="selectSize(this)">L</button>
+    </div>
+</div>
+
+<!-- HTML cho các nút Màu sắc -->
+<div class="color-row">
+    <span>Color:</span>
+    <div class="color-options">
+        <div class="color-circle white" onclick="selectColor('white')"></div>
+        <div class="color-circle black" onclick="selectColor('black')"></div>
+    </div>
+</div>
+
+<!-- HTML cho chọn số lượng -->
+<div class="quantity">
+    <span>Quantity:</span>
+    <input type="number" id="quantity" value="1" min="1">
+</div>
+
+<!-- Nút "Buy Now" và "Add to Cart" -->
+<div class="button-container">
+    <button id="BUY NOWButton" class="product-info button">
+BUY NOW
+    </button>
+    <button id="ADD TO CARTButton" class="product-info button">
+ADD TO CART
+    </button>
+</div>
+
+
+<script>
+    let selectedSize = '';
+    let selectedColor = '';
+    let selectedQuantity = 1;
+
+    // Hàm để chọn size
+    function selectSize(button) {
+        const buttons = document.querySelectorAll('.size-buttons button');
+        buttons.forEach(btn => btn.classList.remove('selected'));
+        button.classList.add('selected');
+        selectedSize = button.innerText;
+    }
+
+    // Hàm để chọn màu
+    function selectColor(color) {
+        selectedColor = color;
+        const circles = document.querySelectorAll('.color-circle');
+        circles.forEach(circle => {
+            if (circle.classList.contains(color)) {
+                circle.style.border = '2px solid red'; 
+            } else {
+                circle.style.border = '2px solid #ccc';
+            }
+        });
+    }
+
+    // Hàm để cập nhật số lượng
+    document.getElementById('quantity').addEventListener('input', function() {
+        selectedQuantity = parseInt(this.value);
+    });
+
+    // Chuyển hướng khi nhấn nút "Buy Now"
+    document.getElementById('buyNowButton').addEventListener('click', function(event) {
+        event.preventDefault();
+        
+        if (!selectedSize || !selectedColor) {
+            alert("Please select size and color before proceeding.");
+            return;
+        }
+
+        // Tạo URL cho trang điền thông tin vận chuyển với các tham số query
+        const orderPageUrl = `order-form.html?size=${selectedSize}&color=${selectedColor}&quantity=${selectedQuantity}`;
+
+        // Chuyển hướng đến trang thông tin vận chuyển
+        window.location.href = orderPageUrl;
+    });
+</script>
+
+
+
+      <div class="size-chart">
+        <table>
+<h3 style="margin-top: 10px;">Size Chart</h3>
+
+          <thead>
+            <tr>
+              <th>Size</th>
+              <th>Ngực</th>
+              <th>Eo</th>
+              <th>Mông</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>S</td><td>84</td><td>67</td><td>89</td></tr>
+            <tr><td>M</td><td>88</td><td>71</td><td>93</td></tr>
+            <tr><td>L</td><td>92</td><td>75</td><td>97</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+<script>
+  const colorCircles = document.querySelectorAll('.color-circle');
+  colorCircles.forEach(circle => {
+    circle.addEventListener('click', function () {
+      colorCircles.forEach(c => c.classList.remove('selected'));
+      this.classList.add('selected');
+    });
+  });
+</script>
+
+<style>
+.color-circle.selected {
+  border: 3px solid #e04c2a;
+}
+</style>
+
+
+
+  
+  <footer>
+    <p>&copy; 2025 Quyen Plh Clothing. All rights reserved.</p>
+  </footer>
+
+  <script>
+    function changeMainImage(src) {
+      document.getElementById("mainProductImage").src = src;
+    }
+  </script>
+</body>
+</html>

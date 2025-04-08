@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Form</title>
+</head>
+<body>
+    <h1>Order Information</h1>
+    
+    <h3>Product Details</h3>
+    <p>Size: <span id="orderSize"></span></p>
+    <p>Color: <span id="orderColor"></span></p>
+    <p>Quantity: <span id="orderQuantity"></span></p>
+    
+    <h3>Shipping Information</h3>
+    <form id="shippingForm">
+        <label for="fullName">Full Name:</label><br>
+        <input type="text" id="fullName" name="fullName" required><br><br>
+        
+        <label for="address">Address:</label><br>
+        <input type="text" id="address" name="address" required><br><br>
+        
+        <label for="phone">Phone Number:</label><br>
+        <input type="text" id="phone" name="phone" required><br><br>
+        
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+        
+        <input type="submit" value="Submit Order">
+    </form>
+
+    <script>
+        // Hàm để lấy tham số từ URL
+        function getQueryParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return {
+                size: urlParams.get('size'),
+                color: urlParams.get('color'),
+                quantity: urlParams.get('quantity')
+            };
+        }
+
+        // Lấy các tham số từ URL
+        const params = getQueryParams();
+
+        // Hiển thị thông tin sản phẩm
+        document.getElementById('orderSize').textContent = params.size || 'Not selected';
+        document.getElementById('orderColor').textContent = params.color || 'Not selected';
+        document.getElementById('orderQuantity').textContent = params.quantity || 'Not selected';
+
+        // Xử lý khi gửi form
+        document.getElementById('shippingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const fullName = document.getElementById('fullName').value;
+            const address = document.getElementById('address').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+
+            // Xử lý thông tin và đơn hàng, có thể gửi tới server hoặc hiển thị thông báo
+            alert(`Order placed successfully!\nName: ${fullName}\nAddress: ${address}\nPhone: ${phone}\nEmail: ${email}\nProduct: ${params.size} ${params.color} x ${params.quantity}`);
+        });
+    </script>
+</body>
+</html>
